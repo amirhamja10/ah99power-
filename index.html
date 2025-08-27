@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ah99power</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Loading Screen -->
+  <section id="loading" class="view">
+    <div class="logo">
+      <!-- inline logo (SVG) -->
+      <svg viewBox="0 0 200 60" class="logo-svg" aria-label="ah99power">
+        <rect x="0" y="0" width="200" height="60" rx="12"></rect>
+        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">ah99power</text>
+      </svg>
+    </div>
+    <p class="muted">লোড হচ্ছে...</p>
+  </section>
+
+  <!-- Home / Activate -->
+  <section id="home" class="view hidden">
+    <header class="topbar">
+      <div class="logo-badge">ah99</div>
+    </header>
+    <div class="card">
+      <h1>আপনার অ্যাকাউন্ট একটিভ করুন</h1>
+      <p class="muted">একটিভ না থাকলে ড্যাশবোর্ড ব্যবহার করা যাবে না।</p>
+      <button class="btn primary" id="goActivate">একাউন্ট একটিভ করুন</button>
+    </div>
+  </section>
+
+  <!-- Activation Method -->
+  <section id="activate-method" class="view hidden">
+    <header class="topbar">
+      <button class="link" data-back="home">← পেছনে</button>
+      <div class="logo-badge">ah99</div>
+    </header>
+    <div class="card">
+      <h2>পেমেন্ট পদ্ধতি নির্বাচন করুন</h2>
+      <div class="grid2">
+        <button class="btn outline" data-method="bkash">বিকাশ</button>
+        <button class="btn outline" data-method="nagad">নগদ</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activation Form -->
+  <section id="activate-form" class="view hidden">
+    <header class="topbar">
+      <button class="link" data-back="activate-method">← পেছনে</button>
+      <div class="logo-badge">ah99</div>
+    </header>
+    <div class="card">
+      <h2 id="actTitle">অ্যাকাউন্ট একটিভ করুন</h2>
+
+      <label class="copybox">
+        <span>এই নাম্বারটিতে পেমেন্ট করুন</span>
+        <div class="copyrow">
+          <input id="payNumber" value="01402642783" readonly />
+          <button class="btn small" id="copyBtn">কপি</button>
+        </div>
+      </label>
+
+      <label>
+        <span>যে নাম্বার থেকে টাকা পাঠিয়েছেন</span>
+        <input id="senderNumber" type="tel" placeholder="01XXXXXXXXX" />
+      </label>
+
+      <label>
+        <span>ট্রানজেকশন আইডি (TxnID)</span>
+        <input id="trxId" type="text" placeholder="e.g., 7A1BCD2EF" />
+      </label>
+
+      <button class="btn primary" id="submitActivation">সাবমিট</button>
+      <p class="muted tiny">
+        সাবমিট করলে আপনার আইডি <strong>Pending</strong> এ যাবে। অ্যাডমিন একটিভ করলে নোটিফিকেশন দেখবেন।
+      </p>
+    </div>
+  </section>
+
+  <!-- Pending Screen -->
+  <section id="pending" class="view hidden">
+    <header class="topbar">
+      <div class="logo-badge">ah99</div>
+    </header>
+    <div class="card center">
+      <h2>আপনার একাউন্ট পেন্ডিং এ আছে</h2>
+      <p class="muted">
+        অ্যাডমিন একটিভ করলে পরবর্তী ধাপে সাইন-আপ ফর্ম আসবে।
+      </p>
+      <div class="pill">বর্তমান স্ট্যাটাস: <b id="statusBadge">PENDING</b></div>
+
+      <!-- ডেমো: লোকাল অ্যাডমিন টগল (শুধু ফ্রন্টএন্ড ডেমো) -->
+      <details class="admin-demo">
+        <summary>🔧 Admin demo (শুধু টেস্ট)</summary>
+        <button class="btn success" id="adminApprove">Approve (Active)</button>
+        <button class="btn danger" id="adminReject">Reject</button>
+      </details>
+    </div>
+  </section>
+
+  <!-- Signup after approval -->
+  <section id="signup" class="view hidden">
+    <header class="topbar">
+      <div class="logo-badge">ah99</div>
+    </header>
+    <div class="card">
+      <h2>আপনার প্রোফাইল তৈরি করুন</h2>
+
+      <label>
+        <span>ইমেইল বা ফোন নাম্বার</span>
+        <input id="siContact" type="text" placeholder="email@example.com অথবা 01XXXXXXXXX" />
+      </label>
+
+      <div class="grid2">
+        <label>
+          <span>ফার্স্ট নেম</span>
+          <input id="siFirst" type="text" placeholder="First name" />
+        </label>
+        <label>
+          <span>লাস্ট নেম</span>
+          <input id="siLast" type="text" placeholder="Last name" />
+        </label>
+      </div>
+
+      <div class="grid2">
+        <label>
+          <span>পাসওয়ার্ড</span>
+          <input id="siPass" type="password" placeholder="******" />
+        </label>
+        <label>
+          <span>কনফার্ম পাসওয়ার্ড</span>
+          <input id="siPass2" type="password" placeholder="******" />
+        </label>
+      </div>
+
+      <button class="btn primary" id="finishSignup">সাবমিট</button>
+    </div>
+  </section>
+
+  <!-- Dashboard -->
+  <section id="dashboard" class="view hidden">
+    <header class="topbar">
+      <div class="logo-badge small">ah99</div>
+      <nav class="tabs">
+        <button class="tab active" data-tab="balance">My Balance</button>
+        <button class="tab" data-tab="jobs">My Jobs</button>
+        <button class="tab" data-tab="withdraw">Withdraw</button>
+        <button class="tab" data-tab="settings">Settings</button>
+      </nav>
+    </header>
+
+    <div class="tabview" id="tab-balance">
+      <div class="card center">
+        <h2>বর্তমান ব্যালেন্স</h2>
+        <div class="balance" id="balanceTk">৳ 0</div>
+        <p class="muted tiny">জব সম্পন্ন করলে অটো ব্যালেন্স যোগ হবে (ডেমো)।</p>
+      </div>
+    </div>
+
+    <div class="tabview hidden" id="tab-jobs">
+      <div class="card">
+        <h2>আজকের কাজ</h2>
+        <ol class="jobs">
+          <li>
+            <div>
+              ফেসবুকে যান: 
+              <a target="_blank" href="https://facebook.com">facebook.com</a>
+            </div>
+          </li>
+          <li>
+            <div>
+              ইউটিউবে যান:
+              <a target="_blank" href="https://youtube.com">youtube.com</a>
+            </div>
+          </li>
+        </ol>
+
+        <label>
+          <span>স্ক্রিনশট আপলোড করুন (jpg/png)</span>
+          <input id="jobShot" type="file" accept="image/*" />
+        </label>
+        <button class="btn success" id="submitJob">সাবমিট</button>
+        <p class="muted tiny">ডেমো হিসেবে প্রতি সাবমিটে ৳5 যোগ হবে।</p>
+      </div>
+    </div>
+
+    <div class="tabview hidden" id="tab-withdraw">
+      <div class="card">
+        <h2>উইথড্র</h2>
+        <div class="grid2">
+          <label>
+            <span>পদ্ধতি</span>
+            <select id="wdMethod">
+              <option value="bkash">বিকাশ</option>
+              <option value="nagad">নগদ</option>
+            </select>
+          </label>
+          <label>
+            <span>নাম্বার</span>
+            <input id="wdNumber" type="tel" placeholder="01XXXXXXXXX" />
+          </label>
+        </div>
+        <label>
+          <span>অ্যামাউন্ট (৳)</span>
+          <input id="wdAmount" type="number" min="50" step="10" placeholder="যেমন 100" />
+        </label>
+        <button class="btn danger" id="wdSubmit">সাবমিট</button>
+        <p id="wdNote" class="muted tiny"></p>
+      </div>
+    </div>
+
+    <div class="tabview hidden" id="tab-settings">
+      <div class="card">
+        <h2>সেটিংস</h2>
+        <button class="btn outline" id="logout">লগআউট</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <small>© ah99power (ফ্রন্টএন্ড ডেমো)</small>
+  </footer>
+
+  <script src="script.js">
+  </script src="style.css">
+</body>
+</html>
